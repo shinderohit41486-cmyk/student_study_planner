@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyFlow — Student Study Planner</title>
+<style>
+:root{--bg:#f5f7fb;--surface:#fff;--surface2:#f0f3fa;--text:#182033;--muted:#788198;--line:#e4e8f1;--primary:#6258e8;--primary2:#8b5cf6;--green:#19a879;--orange:#f59e0b;--red:#ef5b69;--shadow:0 12px 35px rgba(36,43,78,.07)}
+body.dark{--bg:#10131f;--surface:#191e2d;--surface2:#22283a;--text:#edf0fb;--muted:#9ba5bd;--line:#30374b;--shadow:0 12px 35px rgba(0,0,0,.18)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;transition:background .25s,color .25s}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--surface);border-right:1px solid var(--line);padding:26px 18px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;padding:0 10px;font-weight:800;font-size:20px;letter-spacing:-.6px}.brand-mark{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;color:white;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:0 8px 18px #6258e833}.brand-mark svg{width:22px}.nav-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1.3px;padding:0 12px;margin-bottom:8px}.nav{display:grid;gap:5px}.nav button{border:1px solid transparent;background:transparent;color:var(--muted);text-align:left;padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;transition:.2s}.nav button:hover{background:var(--surface2);color:var(--text);transform:translateX(2px)}.nav button.active{background:#6258e814;color:var(--primary);border-color:#6258e82b;font-weight:700}.nav .ico{width:20px;text-align:center;font-size:17px}.sidebar-bottom{margin-top:auto;background:linear-gradient(145deg,#6258e817,#8b5cf610);border:1px solid #6258e82b;border-radius:16px;padding:16px}.sidebar-bottom strong{display:block;margin-bottom:5px}.sidebar-bottom p{font-size:12px;color:var(--muted);margin:0 0 12px}.main{min-width:0;padding:26px clamp(16px,3vw,42px) 40px;max-width:1600px;width:100%;margin:0 auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}.eyebrow{color:var(--muted);font-size:13px;margin-bottom:3px}.topbar h1{font-size:clamp(23px,3vw,31px);letter-spacing:-1px;margin:0}.top-actions{display:flex;gap:10px;align-items:center}.icon-btn,.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;transition:transform .18s,box-shadow .18s,border-color .18s}.icon-btn{width:43px;height:43px;font-size:18px}.btn{padding:10px 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:13px}.btn:hover,.icon-btn:hover{border-color:var(--primary);box-shadow:0 5px 16px #6258e81c;transform:translateY(-2px)}.btn:active,.icon-btn:active{transform:scale(.96)}.btn-primary{color:var(--primary);border-color:var(--primary);background:transparent}.btn-primary:hover{background:#6258e810}.btn-solid{background:var(--primary);color:#fff;border-color:var(--primary)}.btn-solid:hover{background:#5147d8;color:white}.welcome{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 27px;border-radius:20px;background:linear-gradient(110deg,#6258e8,#8872f2 65%,#a08af9);color:white;box-shadow:0 15px 35px #6258e82c;margin-bottom:22px;position:relative;overflow:hidden}.welcome:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff2c;border-radius:50%;right:4%;top:-125px;box-shadow:0 0 0 28px #ffffff0c,0 0 0 58px #ffffff09}.welcome h2{margin:0 0 6px;font-size:clamp(20px,2.5vw,27px);letter-spacing:-.7px}.welcome p{margin:0;color:#f0edff;font-size:13px}.welcome .btn{position:relative;z-index:1;border-color:#ffffffb8;color:white;background:#ffffff12;white-space:nowrap}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:22px}.stat{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);min-width:0}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:650;gap:5px}.stat-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:16px;background:#6258e814;color:var(--primary)}.stat:nth-child(2) .stat-icon{background:#19a87916;color:var(--green)}.stat:nth-child(3) .stat-icon{background:#f59e0b19;color:var(--orange)}.stat:nth-child(4) .stat-icon{background:#ec489916;color:#ec4899}.stat-number{font-size:29px;letter-spacing:-1px;font-weight:800;margin:13px 0 2px}.stat-note{font-size:11px;color:var(--muted)}.content-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr);gap:20px;align-items:start}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);min-width:0}.panel-head{padding:19px 20px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-head h3{margin:0;font-size:16px;letter-spacing:-.3px}.panel-sub{font-size:12px;color:var(--muted);margin-top:3px}.task-controls{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 15px}.field{background:var(--surface);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 11px;outline:none;min-width:0}.field:focus{border-color:var(--primary);box-shadow:0 0 0 3px #6258e81a}.search{flex:1;min-width:125px}.task-list{padding:0 13px 12px}.task{display:flex;gap:12px;align-items:flex-start;padding:14px 8px;border-bottom:1px solid var(--line);transition:background .2s}.task:last-child{border-bottom:0}.task:hover{background:var(--surface2);border-radius:10px}.check{appearance:none;width:19px;height:19px;flex-shrink:0;border:1.7px solid #b7bfd0;border-radius:6px;margin:2px 0 0;cursor:pointer;display:grid;place-items:center;transition:.2s}.check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{content:"✓";color:#fff;font-size:13px;font-weight:800}.task-main{flex:1;min-width:0}.task-title{font-weight:700;font-size:13px;overflow-wrap:anywhere}.task.done .task-title{text-decoration:line-through;color:var(--muted)}.task-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:6px;font-size:11px;color:var(--muted)}.pill{display:inline-flex;align-items:center;gap:4px;border-radius:6px;padding:4px 7px;font-size:10px;font-weight:750;background:var(--surface2);color:var(--muted)}.priority-high{color:var(--red);background:#ef5b6914}.priority-medium{color:#c1840b;background:#f59e0b18}.priority-low{color:var(--green);background:#19a87916}.task-actions{display:flex;gap:4px;opacity:.65}.tiny-btn{border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;width:29px;height:29px}.tiny-btn:hover{border-color:var(--line);color:var(--primary);background:var(--surface)}.empty{text-align:center;padding:35px 10px;color:var(--muted);font-size:13px}.empty .big{font-size:30px;margin-bottom:8px}.right-col{display:grid;gap:20px}.progress-body{padding:0 20px 20px}.progress-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:14px 0 8px}.progress-row span:last-child{color:var(--muted)}.track{height:8px;background:var(--surface2);border-radius:20px;overflow:hidden}.bar{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--primary),var(--primary2));transition:width .5s}.subject-item{display:flex;align-items:center;gap:9px;margin:15px 0}.subject-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}.subject-name{font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.subject-count{font-size:11px;color:var(--muted)}.timer-panel{padding:20px;text-align:center}.timer-top{display:flex;align-items:center;justify-content:space-between;text-align:left}.timer-top h3{margin:0;font-size:16px}.timer-top p{margin:3px 0 0;color:var(--muted);font-size:12px}.timer-modes{display:flex;background:var(--surface2);padding:4px;border-radius:10px;gap:3px;margin:18px 0 14px}.timer-modes button{flex:1;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:7px;padding:7px 3px;font-size:11px;font-weight:700}.timer-modes button.active{background:var(--surface);border-color:var(--line);color:var(--primary);box-shadow:0 2px 5px #00000008}.clock{font-size:clamp(45px,6vw,60px);letter-spacing:-2px;font-weight:800;font-variant-numeric:tabular-nums;margin:12px 0 2px}.timer-caption{color:var(--muted);font-size:12px;margin-bottom:18px}.timer-actions{display:flex;justify-content:center;gap:9px}.timer-actions .btn{min-width:105px}.chart-wrap{padding:0 20px 20px}.chart{height:145px;display:flex;align-items:end;gap:12px;padding-top:15px}.chart-col{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px;min-width:0}.chart-bar{width:min(100%,28px);min-height:3px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#8c7cf7,var(--primary));transition:height .4s}.chart-label{font-size:10px;color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:11px;padding:25px 0 0}.modal-backdrop{position:fixed;inset:0;background:#11162988;backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.show{display:flex;animation:fade .18s ease}.modal{width:min(100%,500px);max-height:92vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:23px;box-shadow:0 25px 80px #0003;animation:rise .2s ease}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{font-size:20px;margin:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-field{display:grid;gap:6px}.form-field.full{grid-column:1/-1}.form-field label{font-size:12px;font-weight:750;color:var(--muted)}.form-field .field{width:100%}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--text);color:var(--surface);padding:11px 16px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);transition:.25s;z-index:30;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.mobile-menu{display:none}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes rise{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}@media(max-width:1050px){.app{grid-template-columns:210px minmax(0,1fr)}.sidebar{padding:22px 12px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:minmax(0,1fr)}.right-col{grid-template-columns:repeat(2,minmax(0,1fr))}.timer-panel{grid-row:span 2}}@media(max-width:700px){.app{display:block}.sidebar{position:fixed;z-index:20;left:0;top:0;bottom:0;width:260px;transform:translateX(-105%);transition:transform .25s;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}.mobile-menu{display:inline-grid}.main{padding:18px 13px 28px}.topbar{margin-bottom:19px}.topbar h1{font-size:23px}.top-actions{gap:6px}.top-actions .btn{padding:10px;font-size:12px}.welcome{padding:20px;border-radius:16px;align-items:flex-start}.welcome .btn{font-size:0;padding:10px}.welcome .btn span{font-size:17px}.stats{gap:10px;margin-bottom:15px}.stat{padding:14px;border-radius:14px}.stat-number{font-size:25px}.content-grid{gap:14px}.right-col{grid-template-columns:1fr;gap:14px}.timer-panel{grid-row:auto}.panel-head{padding:17px 15px 12px}.task-controls{padding:0 15px 12px}.task-list{padding:0 10px 10px}.task{padding:13px 5px;gap:9px}.task-actions{opacity:1}.chart-wrap,.progress-body{padding-left:16px;padding-right:16px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.modal{padding:19px}.footer{padding-top:20px}}@media(max-width:380px){.stats{grid-template-columns:1fr 1fr}.stat-top{font-size:11px}.stat-icon{width:29px;height:29px}.welcome p{max-width:205px}.task-controls .field{font-size:12px}.task-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="m9 8 2 2 4-4"/></svg></div>StudyFlow</div>
+    <div><div class="nav-label">WORKSPACE</div><nav class="nav">
+      <button class="active" data-view="all"><span class="ico">▦</span> Dashboard</button>
+      <button data-view="today"><span class="ico">◷</span> Today's Tasks</button>
+      <button data-view="upcoming"><span class="ico">▣</span> Upcoming</button>
+      <button data-view="completed"><span class="ico">✓</span> Completed</button>
+    </nav></div>
+    <div><div class="nav-label">YOUR STUDY SPACE</div><nav class="nav">
+      <button id="focusNav"><span class="ico">◎</span> Focus Timer</button>
+      <button id="subjectsNav"><span class="ico">◈</span> Subjects & Progress</button>
+    </nav></div>
+    <div class="sidebar-bottom"><strong>Small steps, big wins ✨</strong><p>Every focused session brings you closer to your goals.</p><button class="btn btn-primary" style="width:100%" id="sidebarAdd">＋ Add a task</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div style="display:flex;gap:10px;align-items:center"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button><div><div class="eyebrow" id="todayLabel">YOUR PERSONAL STUDY SPACE</div><h1 id="pageTitle">Good day, student 👋</h1></div></div><div class="top-actions"><button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle theme">☾</button><button class="btn btn-solid" id="addTaskTop">＋ <span>Add Task</span></button></div></header>
+    <section class="welcome"><div><h2>Make today count.</h2><p id="welcomeText">A little progress each day adds up to big results.</p></div><button class="btn" id="jumpTasks"><span>↓</span> View my tasks</button></section>
+    <section class="stats">
+      <article class="stat"><div class="stat-top">Total tasks <span class="stat-icon">▤</span></div><div class="stat-number" id="totalStat">0</div><div class="stat-note">Tasks in your planner</div></article>
+      <article class="stat"><div class="stat-top">Completed <span class="stat-icon">✓</span></div><div class="stat-number" id="completedStat">0</div><div class="stat-note" id="completedNote">Keep it up!</div></article>
+      <article class="stat"><div class="stat-top">Due today <span class="stat-icon">◷</span></div><div class="stat-number" id="todayStat">0</div><div class="stat-note">Stay on track</div></article>
+      <article class="stat"><div class="stat-top">Completion <span class="stat-icon">↗</span></div><div class="stat-number" id="rateStat">0%</div><div class="stat-note">Your overall progress</div></article>
+    </section>
+    <section class="content-grid">
+      <article class="panel" id="tasksPanel"><div class="panel-head"><div><h3 id="taskHeading">Your tasks</h3><div class="panel-sub" id="taskSub">Plan it. Do it. Done.</div></div><button class="btn btn-primary" id="addTaskPanel">＋ New task</button></div>
+        <div class="task-controls"><input class="field search" id="searchInput" placeholder="⌕  Search tasks..." aria-label="Search tasks"><select class="field" id="subjectFilter" aria-label="Filter by subject"><option value="">All subjects</option></select><select class="field" id="statusFilter" aria-label="Filter by status"><option value="active">Active tasks</option><option value="all">All tasks</option><option value="done">Completed</option></select></div>
+        <div class="task-list" id="taskList"></div>
+      </article>
+      <div class="right-col">
+        <article class="panel" id="progressPanel"><div class="panel-head"><div><h3>Subject progress</h3><div class="panel-sub">See how you're doing</div></div><span style="font-size:20px;color:var(--primary)">◈</span></div><div class="progress-body" id="subjectProgress"></div></article>
+        <article class="panel timer-panel" id="timerPanel"><div class="timer-top"><div><h3>Focus timer</h3><p>One thing at a time.</p></div><span style="font-size:21px">⏱</span></div><div class="timer-modes"><button class="active" data-mode="focus">Focus</button><button data-mode="short">Short break</button><button data-mode="long">Long break</button></div><div class="clock" id="clock">25:00</div><div class="timer-caption" id="timerCaption">Ready when you are</div><div class="timer-actions"><button class="btn btn-solid" id="timerStart">▶ Start</button><button class="btn" id="timerReset">↻ Reset</button></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Weekly overview</h3><div class="panel-sub">Tasks completed this week</div></div><span style="font-size:20px;color:var(--primary)">▥</span></div><div class="chart-wrap"><div class="chart" id="weeklyChart"></div></div></article>
+      </div>
+    </section>
+    <div class="footer">Made for your goals, one task at a time ✦ StudyFlow</div>
+  </main>
+</div>
+<div class="modal-backdrop" id="taskModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Add a new task</h2><button class="icon-btn" id="closeModal" aria-label="Close">×</button></div><form id="taskForm"><input type="hidden" id="taskId"><div class="form-grid">
+  <div class="form-field full"><label for="taskTitle">Task title *</label><input class="field" id="taskTitle" required maxlength="120" placeholder="e.g. Revise chapter 4"></div>
+  <div class="form-field"><label for="taskSubject">Subject *</label><input class="field" id="taskSubject" required maxlength="50" list="subjectOptions" placeholder="e.g. Mathematics"><datalist id="subjectOptions"><option>Mathematics</option><option>Physics</option><option>Computer Science</option><option>English</option><option>Chemistry</option></datalist></div>
+  <div class="form-field"><label for="taskDue">Due date *</label><input class="field" id="taskDue" type="date" required></div>
+  <div class="form-field"><label for="taskPriority">Priority</label><select class="field" id="taskPriority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></div>
+  <div class="form-field"><label for="taskType">Task type</label><select class="field" id="taskType"><option>Study</option><option>Assignment</option><option>Revision</option><option>Exam prep</option><option>Project</option><option>Reading</option></select></div>
+  <div class="form-field full"><label for="taskNotes">Notes (optional)</label><textarea class="field" id="taskNotes" rows="2" maxlength="300" placeholder="Add a reminder or details..."></textarea></div>
+</div><div class="modal-actions"><button class="btn" type="button" id="cancelModal">Cancel</button><button class="btn btn-solid" type="submit" id="saveTaskBtn">Save task →</button></div></form></div></div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+  const shiftDate = n => { const d = new Date(); d.setDate(d.getDate()+n); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+  const escapeHTML = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const dateLabel = s => { if(!s) return 'No date'; const d = new Date(s+'T12:00:00'); return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}); };
+  const seed = [
+    {id:'demo1',title:'Review calculus integration',subject:'Mathematics',due:shiftDate(0),priority:'high',type:'Revision',notes:'Practice 10 problems',done:false,created:Date.now()-50000},
+    {id:'demo2',title:'Finish lab report',subject:'Physics',due:shiftDate(1),priority:'medium',type:'Assignment',notes:'Include observations and conclusion',done:false,created:Date.now()-40000},
+    {id:'demo3',title:'Read data structures chapter',subject:'Computer Science',due:shiftDate(2),priority:'low',type:'Reading',notes:'Review linked lists and stacks',done:false,created:Date.now()-30000},
+    {id:'demo4',title:'Prepare presentation outline',subject:'English',due:shiftDate(3),priority:'medium',type:'Project',notes:'Draft 5 key points',done:true,completedAt:Date.now()-86400000,created:Date.now()-20000},
+    {id:'demo5',title:'Practice chemistry equations',subject:'Chemistry',due:shiftDate(4),priority:'high',type:'Study',notes:'Balance the practice set',done:false,created:Date.now()-10000}
+  ];
+  let tasks = [];
+  try { const saved = localStorage.getItem('studyflow_tasks_v1'); tasks = saved ? JSON.parse(saved) : seed; if(!Array.isArray(tasks)) tasks = seed; } catch { tasks = seed; }
+  let view = 'all', editingId = null, timerMode = 'focus', timerRemaining = 25*60, timerInterval = null, timerRunning = false, toastTimeout;
+  const save = () => { try { localStorage.setItem('studyflow_tasks_v1', JSON.stringify(tasks)); } catch {} };
+  const showToast = message => { $('toast').textContent = message; $('toast').classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(()=>$('toast').classList.remove('show'),2300); };
+  const subjectColors = ['#6258e8','#19a879','#f59e0b','#ec4899','#0ea5e9','#8b5cf6','#ef5b69'];
+  const getSubjects = () => [...new Set(tasks.map(t=>t.subject.trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  function renderFilters() {
+    const current = $('subjectFilter').value;
+    $('subjectFilter').innerHTML = '<option value="">All subjects</option>' + getSubjects().map(s=>`<option value="${escapeHTML(s)}">${escapeHTML(s)}</option>`).join('');
+    if(getSubjects().includes(current)) $('subjectFilter').value = current;
+  }
+  function renderStats() {
+    const done = tasks.filter(t=>t.done).length, todayTasks = tasks.filter(t=>!t.done && t.due===today()).length;
+    $('totalStat').textContent = tasks.length;
+    $('completedStat').textContent = done;
+    $('todayStat').textContent = todayTasks;
+    $('rateStat').textContent = (tasks.length ? Math.round(done/tasks.length*100) : 0)+'%';
+    $('completedNote').textContent = tasks.length ? `${Math.round(done/tasks.length*100)}% of all tasks` : 'Start with one task';
+    $('welcomeText').textContent = todayTasks ? `You have ${todayTasks} task${todayTasks===1?'':'s'} due today. You've got this!` : 'A little progress each day adds up to big results.';
+  }
+  function renderTasks() {
+    const q = $('searchInput').value.trim().toLowerCase(), subject = $('subjectFilter').value, status = $('statusFilter').value;
+    let arr = tasks.filter(t => {
+      if(view==='today' && t.due!==today()) return false;
+      if(view==='upcoming' && (t.done || t.due<today())) return false;
+      if(view==='completed' && !t.done) return false;
+      if(status==='active' && t.done) return false;
+      if(status==='done' && !t.done) return false;
+      if(subject && t.subject!==subject) return false;
+      if(q && !`${t.title} ${t.subject} ${t.type} ${t.notes||''}`.toLowerCase().includes(q)) return false;
+      return true;
+    });
+    arr.sort((a,b) => Number(a.done)-Number(b.done) || a.due.localeCompare(b.due) || ({high:0,medium:1,low:2}[a.priority] - {high:0,medium:1,low:2}[b.priority]));
+    const headings = {all:['Your tasks','Plan it. Do it. Done.'],today:["Today's tasks",'Everything due today'],upcoming:['Upcoming tasks','What’s coming up next'],completed:['Completed tasks','Look at what you’ve achieved']};
+    $('taskHeading').textContent = headings[view][0]; $('taskSub').textContent = `${arr.length} task${arr.length===1?'':'s'} · ${headings[view][1]}`;
+    if(!arr.length) { $('taskList').innerHTML = `<div class="empty"><div class="big">${q?'⌕':'✦'}</div><strong>${q?'No matching tasks':'Nothing here yet'}</strong><div style="margin-top:5px">${q?'Try another search or filter.':'Add a task and make a little progress today.'}</div>${!q?'<button class="btn btn-primary" style="margin-top:14px" id="emptyAdd">＋ Create a task</button>':''}</div>`; const b=$('emptyAdd'); if(b)b.onclick=()=>openModal(); return; }
+    $('taskList').innerHTML = arr.map(t => {
+      const overdue = !t.done && t.due<today(), dueText = t.due===today()?'Today':t.due===shiftDate(1)?'Tomorrow':dateLabel(t.due);
+      return `<div class="task ${t.done?'done':''}"><input class="check" type="checkbox" aria-label="Mark ${escapeHTML(t.title)} complete" data-check="${escapeHTML(t.id)}" ${t.done?'checked':''}><div class="task-main"><div class="task-title">${escapeHTML(t.title)}</div><div class="task-meta"><span class="pill">${escapeHTML(t.subject)}</span><span>◷ ${escapeHTML(dueText)}</span>${overdue?'<span class="pill priority-high">Overdue</span>':''}<span class="pill priority-${escapeHTML(t.priority)}">${escapeHTML(t.priority[0].toUpperCase()+t.priority.slice(1))}</span><span>${escapeHTML(t.type)}</span></div>${t.notes?`<div style="font-size:11px;color:var(--muted);margin-top:5px;overflow-wrap:anywhere">${escapeHTML(t.notes)}</div>`:''}</div><div class="task-actions"><button class="tiny-btn" data-edit="${escapeHTML(t.id)}" title="Edit task" aria-label="Edit task">✎</button><button class="tiny-btn" data-delete="${escapeHTML(t.id)}" title="Delete task" aria-label="Delete task">×</button></div></div>`;
+    }).join('');
+  }
+  function renderProgress() {
+    const subjects = getSubjects();
+    if(!subjects.length){$('subjectProgress').innerHTML='<div class="empty">Your subject progress will appear here.</div>';return;}
+    $('subjectProgress').innerHTML = subjects.map((s,i) => { const list=tasks.filter(t=>t.subject===s), done=list.filter(t=>t.done).length, pct=Math.round(done/list.length*100); return `<div class="progress-row"><span>${escapeHTML(s)}</span><span>${done}/${list.length} · ${pct}%</span></div><div class="track"><div class="bar" style="width:${pct}%;background:${subjectColors[i%subjectColors.length]}"></div></div>`; }).join('');
+  }
+  function renderChart() {
+    const days = [];
+    for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;days.push({key,label:d.toLocaleDateString(undefined,{weekday:'short'}),count:tasks.filter(t=>t.done&&t.completedAt&&new Date(t.completedAt).toDateString()===d.toDateString()).length});}
+    const max=Math.max(1,...days.map(d=>d.count));
+    $('weeklyChart').innerHTML=days.map(d=>`<div class="chart-col" title="${d.count} completed"><div class="chart-bar" style="height:${Math.max(3,d.count/max*100)}%"></div><div class="chart-label">${d.label}</div></div>`).join('');
+  }
+  function renderAll(){renderFilters();renderStats();renderTasks();renderProgress();renderChart();}
+  function openModal(id=null) {
+    editingId=id; $('taskForm').reset(); $('taskId').value=id||''; $('taskDue').value=today(); $('taskPriority').value='medium';
+    if(id){const t=tasks.find(x=>x.id===id);if(!t)return;$('modalTitle').textContent='Edit task';$('taskTitle').value=t.title;$('taskSubject').value=t.subject;$('taskDue').value=t.due;$('taskPriority').value=t.priority;$('taskType').value=t.type;$('taskNotes').value=t.notes||'';$('saveTaskBtn').textContent='Save changes →';}
+    else{$('modalTitle').textContent='Add a new task';$('saveTaskBtn').textContent='Save task →';}
+    $('taskModal').classList.add('show');setTimeout(()=>$('taskTitle').focus(),80);
+  }
+  function closeModal(){$('taskModal').classList.remove('show');editingId=null;}
+  $('taskForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const title=$('taskTitle').value.trim(), subject=$('taskSubject').value.trim(), due=$('taskDue').value;
+    if(!title||!subject||!due){showToast('Please fill in all required fields.');return;}
+    const data={title,subject,due,priority:$('taskPriority').value,type:$('taskType').value,notes:$('taskNotes').value.trim()};
+    if(editingId){tasks=tasks.map(t=>t.id===editingId?{...t,...data}:t);showToast('Task updated successfully.');}
+    else{tasks.push({id:(crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random())),...data,done:false,created:Date.now()});showToast('Task added to your planner!');}
+    save();closeModal();renderAll();
+  });
+  $('taskList').addEventListener('change',e=>{const id=e.target.dataset.check;if(!id)return;const t=tasks.find(x=>x.id===id);if(t){t.done=e.target.checked;if(t.done)t.completedAt=Date.now();else delete t.completedAt;save();renderAll();showToast(t.done?'Nice work — task completed!':'Task marked as active.');}});
+  $('taskList').addEventListener('click',e=>{const edit=e.target.closest('[data-edit]'), del=e.target.closest('[data-delete]');if(edit)openModal(edit.dataset.edit);if(del){const t=tasks.find(x=>x.id===del.dataset.delete);if(t&&confirm(`Delete "${t.title}"?`)){tasks=tasks.filter(x=>x.id!==t.id);save();renderAll();showToast('Task deleted.');}}});
+  ['addTaskTop','addTaskPanel','sidebarAdd'].forEach(id=>$(id).addEventListener('click',()=>openModal()));
+  $('closeModal').onclick=closeModal;$('cancelModal').onclick=closeModal;
+  $('taskModal').addEventListener('click',e=>{if(e.target===$('taskModal'))closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();$('sidebar').classList.remove('open');}});
+  $('searchInput').addEventListener('input',renderTasks);$('subjectFilter').addEventListener('change',renderTasks);$('statusFilter').addEventListener('change',renderTasks);
+  document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>{view=btn.dataset.view;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b===btn));$('pageTitle').textContent=({all:'Good day, student 👋',today:"Today's focus 🎯",upcoming:'Plan ahead 📅',completed:'Look at you go 🎉'})[view];$('statusFilter').value=view==='completed'?'done':'active';$('sidebar').classList.remove('open');renderTasks();}));
+  $('themeBtn').onclick=()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeBtn').textContent=dark?'☀':'☾';try{localStorage.setItem('studyflow_theme',dark?'dark':'light')}catch{}};
+  try{if(localStorage.getItem('studyflow_theme')==='dark'){document.body.classList.add('dark');$('themeBtn').textContent='☀';}}catch{}
+  $('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');
+  $('jumpTasks').onclick=()=>$('tasksPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  $('focusNav').onclick=()=>{$('timerPanel').scrollIntoView({behavior:'smooth',block:'center'});$('sidebar').classList.remove('open');};
+  $('subjectsNav').onclick=()=>{$('progressPanel').scrollIntoView({behavior:'smooth',block:'center'});$('sidebar').classList.remove('open');};
+  $('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}).toUpperCase();
+  const modes={focus:{seconds:25*60,label:'Time to focus on your goals'},short:{seconds:5*60,label:'Take a little breather'},long:{seconds:15*60,label:'Recharge before the next round'}};
+  function updateClock(){const m=Math.floor(timerRemaining/60),s=timerRemaining%60;$('clock').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;document.title=`${$('clock').textContent} — StudyFlow`;}
+  function stopTimer(){clearInterval(timerInterval);timerInterval=null;timerRunning=false;$('timerStart').textContent='▶ Start';}
+  function setMode(mode){stopTimer();timerMode=mode;timerRemaining=modes[mode].seconds;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$('timerCaption').textContent=modes[mode].label;updateClock();}
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+  $('timerStart').onclick=()=>{if(timerRunning){stopTimer();$('timerCaption').textContent='Paused — resume when ready';return;}timerRunning=true;$('timerStart').textContent='Ⅱ Pause';$('timerCaption').textContent='You’re doing great. Keep going!';timerInterval=setInterval(()=>{timerRemaining--;updateClock();if(timerRemaining<=0){stopTimer();$('timerCaption').textContent='Session complete — well done!';showToast(timerMode==='focus'?'Focus session complete! Time for a break.':'Break complete! Ready to focus?');if('Notification'in window&&Notification.permission==='granted')new Notification('StudyFlow',{body:'Your timer is complete!'});}},1000);};
+  $('timerReset').onclick=()=>{setMode(timerMode);showToast('Timer reset.');};
+  renderAll();updateClock();
+})();
+</script>
+</body>
+</html>
